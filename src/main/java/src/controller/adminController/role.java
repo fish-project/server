@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import src.exception.userNotFound;
 import src.model.user;
 import src.repository.userRepository;
+import src.service.userService;
 import src.view.badRequest;
 import src.view.notFound;
 import src.view.success;
@@ -17,18 +18,15 @@ import src.view.success;
 @RequestMapping("/admin")
 public class role {
     @Autowired
+    userService userservice;
+
+    @Autowired
     userRepository userRepo;
 
     @PatchMapping("/assign")
-    public ResponseEntity<?> assignRole(HttpServletRequest request, @RequestParam String role) {
+    public ResponseEntity<?> assignRole(HttpServletRequest request, @RequestParam String role, @RequestParam String email) {
         try {
-            String email = (String) request.getAttribute("email");
-
-            user user = userRepo.findById(email).orElseThrow(userNotFound::new);
-
-            user.setRole(role);
-
-            userRepo.save(user);
+            userservice.assignRole(email, role);
 
             return new  ResponseEntity<>(
                     new success<String>("Assign role successfully")
@@ -38,9 +36,9 @@ public class role {
                     new notFound<String>(e.getMessage())
                     ,HttpStatus.NOT_FOUND
             );
-        } catch (IllegalArgumentException ignored) {
+        } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(
-                    new badRequest(ignored.getMessage())
+                    new badRequest(e.getMessage())
                     , HttpStatus.BAD_REQUEST
             );
         }

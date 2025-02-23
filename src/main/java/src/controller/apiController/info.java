@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import src.exception.userNotFound;
 import src.model.user;
 import src.repository.userRepository;
+import src.service.userService;
 import src.view.badRequest;
 import src.view.respond;
 import src.view.success;
@@ -17,6 +18,9 @@ import src.view.success;
 public class info {
     @Autowired
     userRepository userRepo;
+
+    @Autowired
+    userService service;
 
     @GetMapping
     public ResponseEntity<?> getUserInfo(HttpServletRequest request) {
@@ -44,15 +48,11 @@ public class info {
     @PatchMapping("/changeDisplayName")
     public ResponseEntity<?> changeDisplayName(HttpServletRequest request, @RequestParam String name) {
         try {
-            String username = (String) request.getAttribute("email");
-            user user = userRepo.findById(username).orElseThrow(userNotFound::new);
-
-            user.setDisplayName(name);
-
-            userRepo.save(user);
+            String email = (String) request.getAttribute("email");
+            service.updateDisplayName(email, name);
 
             return new ResponseEntity<>(
-                    new success<user>(user),
+                    new success<String>("success"),
                     HttpStatus.OK
             );
         } catch (userNotFound userNotFound) {
@@ -64,7 +64,7 @@ public class info {
                     ),
                     HttpStatus.NOT_FOUND
             );
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             return new ResponseEntity<>(
                     new badRequest(e.getMessage()),
                     HttpStatus.BAD_REQUEST
