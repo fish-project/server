@@ -12,8 +12,11 @@ spring:
       poll-interval: 100 
       quiet-period: 50    
     livereload:
-      enabled: true 
-
+      enabled: true
+  data:
+    mongodb:
+      uri: ${mongo_uri}
+      database: ${mongo_database_name}
 
 server:
   port: 8080  

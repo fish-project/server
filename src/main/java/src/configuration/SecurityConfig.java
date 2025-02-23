@@ -7,23 +7,29 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import src.filter.apiFilter;
+import src.filter.jwtFilter;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
     @Autowired
-    apiFilter apiFilter;
+    jwtFilter jwtFilter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf(AbstractHttpConfigurer::disable);
+
         http
-            .csrf(csrf -> csrf.disable())
-            .securityMatcher("/api/**")
-            .addFilterBefore(apiFilter, UsernamePasswordAuthenticationFilter.class);
+            .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+            .authorizeHttpRequests(auth -> auth
+                    .requestMatchers("/public/**"). permitAll()
+                    .requestMatchers("/api/**").hasRole("USER")
+                    .requestMatchers("/admin/**").hasRole("ADMIN")
+            );
 
         return http.build();
     }

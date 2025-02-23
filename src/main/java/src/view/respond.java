@@ -7,19 +7,19 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.http.HttpStatusCode;
 
 @Getter
 @Setter
-@AllArgsConstructor
-public class respond<T> {
+public class respond<T>  {
     private final String timestamp = ZonedDateTime.now().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+    private String status;
+    private int code;
     private T message;
-    private String error;
-    private int status;
 
-    public respond(T message, int status, String error) {
+    public respond(T message, int code, String status) {
         this.message = message;
+        this.code = code;
         this.status = status;
-        this.error = error;
     }
 }
