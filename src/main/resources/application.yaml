@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: lmao
+  web:
+    resources:
+      add-mappings: false
+  devtools:
+    restart:
+      enabled: true 
+      trigger-file: .reloadtrigger 
+      additional-paths: src/main/java 
+      poll-interval: 100 
+      quiet-period: 50    
+    livereload:
+      enabled: true 
+
+
+server:
+  port: 8080  
+  error:
+    whitelabel:
+      enabled: false  
+    include-message: always  
+    include-binding-errors: always  
+    include-stacktrace: never  
