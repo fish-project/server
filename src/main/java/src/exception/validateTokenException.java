@@ -1,12 +1,13 @@
 package src.exception;
 
+import lombok.Getter;
 import src.view.respond;
 
-public class validateTokenException extends Exception {
+@Getter
+public class validateTokenException extends customApiException {
     private respond<String> respond;
 
     public validateTokenException(respond<String> res) {
-        super(res.getMessage());
-        this.respond = res;
+        super(res);
     }
 }

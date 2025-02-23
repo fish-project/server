@@ -11,11 +11,15 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
 public class respond<T> {
     private final String timestamp = ZonedDateTime.now().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
-    private String path;
-    private String error;
     private T message;
+    private String error;
     private int status;
+
+    public respond(T message, int status, String error) {
+        this.message = message;
+        this.status = status;
+        this.error = error;
+    }
 }
