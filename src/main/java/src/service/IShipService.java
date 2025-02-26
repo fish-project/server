@@ -8,4 +8,8 @@ import java.io.IOException;
 
 public interface IShipService {
     ResponseEntity<?> createShip(ShipDTO shipDTO) throws IOException;
+
+    ResponseEntity<?> addMember(String email, String shipName);
+
+    ResponseEntity<?> getShip(String shipName);
 }

@@ -14,11 +14,21 @@ public class createShip {
     private IShipService shipService;
 
     @PostMapping("/create")
-    public ResponseEntity<?> createShip(@RequestBody ShipDTO shipDTO) {
+    public ResponseEntity<?> createShip(@ModelAttribute ShipDTO shipDTO) {
         try {
             return shipService.createShip(shipDTO);
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body("Lỗi khi tạo ship: " + e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Lỗi hệ thống: " + e.getMessage());
+        }
+    }
+    @PostMapping("/addmember")
+    public ResponseEntity<?> addMember(@ModelAttribute ShipDTO shipDTO) {
+        try{
+            return shipService.addMember(shipDTO.getEmail(), shipDTO.getShipName());
+        } catch(RuntimeException e) {
+            return ResponseEntity.badRequest().body("Lỗi khi thêm memeber: " + e.getMessage());
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Lỗi hệ thống: " + e.getMessage());
         }

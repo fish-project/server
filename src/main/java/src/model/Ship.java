@@ -2,24 +2,35 @@ package src.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.List;
 
-@Document(collection = "ships") // Định nghĩa collection trong MongoDB
+@Document(collection = "ship") // Định nghĩa collection trong MongoDB
 public class Ship {
     @Id
     private String id;
-    private String name;
+    private String shipName;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate createdDate;
-    private int crewSize;
 
+    private List<String> member; // Danh sách email thành viên
 
+    public List<String> getMember() {
+        return member;
+    }
+
+    public void setMember(List<String> member) {
+        this.member = member;
+    }
 
     // Constructor có tham số
-    public Ship(String name, LocalDate createdDate, int crewSize) {
-        this.name = name;
+    public Ship(String shipName, LocalDate createdDate, List<String> member) {
+        this.shipName = shipName;
         this.createdDate = createdDate;
-        this.crewSize = crewSize;
+        this.member = member;
+
     }
 
     // Getters & Setters
@@ -31,12 +42,12 @@ public class Ship {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getShipName() {
+        return shipName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setShipName(String shipName) {
+        this.shipName = shipName;
     }
 
     public LocalDate getCreatedDate() {
@@ -47,13 +58,6 @@ public class Ship {
         this.createdDate = createdDate;
     }
 
-    public int getCrewSize() {
-        return crewSize;
-    }
-
-    public void setCrewSize(int crewSize) {
-        this.crewSize = crewSize;
-    }
 
 
 }
