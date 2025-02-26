@@ -29,6 +29,7 @@ public class SecurityConfig {
                     .requestMatchers("/public/**"). permitAll()
                     .requestMatchers("/api/**").hasRole("USER")
                     .requestMatchers("/admin/**").hasRole("ADMIN")
+                    .requestMatchers("/ship/**").hasRole("SHIP_MANAGER")
             );
 
         return http.build();

@@ -4,7 +4,7 @@ import java.util.List;
 
 public class roleHelper {
     private static final List<String> ROLE_MAP = List.of(
-            "user", "admin"
+            "user", "admin", "ship_manager"
     );
 
     public static boolean checkRole(String role) {
