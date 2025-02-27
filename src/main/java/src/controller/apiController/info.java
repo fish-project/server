@@ -27,7 +27,9 @@ public class info {
         String username = (String) request.getAttribute("email");
 
         try {
-            user user = userRepo.findById(username).orElseThrow(userNotFound::new);
+            user user = userRepo.findById(username).orElseThrow(
+                    () -> new userNotFound(username)
+            );
 
             return new ResponseEntity<>(
                     new success<user>(user),

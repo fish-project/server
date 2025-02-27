@@ -1,7 +1,10 @@
 package src.repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
-import src.model.Ship;
+import src.model.ship;
 
-public interface ShipRepository extends MongoRepository<Ship, String> {
+import java.util.List;
+
+public interface ShipRepository extends MongoRepository<ship, String> {
+    List<ship> findByShipOwner(String shipOwner);
 }

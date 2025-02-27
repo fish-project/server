@@ -69,7 +69,9 @@ public class jwtFilter extends HttpFilter {
              String sub = tokenService.validateToken(authHeaderToken);
 
              try {
-                 user = getUser(sub).orElseThrow(userNotFound::new);
+                 user = getUser(sub).orElseThrow(
+                         () -> new userNotFound(sub)
+                 );
              } catch (userNotFound e) {
                  user = new user(
                          sub,

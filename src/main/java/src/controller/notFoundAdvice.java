@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 @RestControllerAdvice
-public class notFound {
+public class notFoundAdvice {
     @ExceptionHandler(NoHandlerFoundException.class)
     @ResponseStatus
     public Map<String, Object> handleNotFound(NoHandlerFoundException ex) {
