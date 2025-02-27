@@ -9,6 +9,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import src.helper.roleHelper;
 
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.List;
 
@@ -21,6 +23,7 @@ public class user {
     private String email;
     private String displayName;
     private List<String> role;
+    private final String createdDate = ZonedDateTime.now().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
 
     public void setDisplayName(String displayName) throws IllegalArgumentException {
         String regex = "^[a-zA-Z0-9_]{5,20}$";
