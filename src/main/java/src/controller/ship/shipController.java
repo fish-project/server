@@ -84,7 +84,7 @@ public class shipController {
 
             return new ResponseEntity<>(new success<ship>(ship), HttpStatus.OK);
         } catch (shipNotFound | userNotFound e) {
-            return new ResponseEntity<>(new notFound<String>(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(new notFound<String>(e.getMessage()), HttpStatus.NOT_FOUND);
         } catch (shipRequestDTOException e) {
             return new ResponseEntity<>(new badRequest(e.getMessage()), HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
