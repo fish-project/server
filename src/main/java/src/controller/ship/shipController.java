@@ -56,7 +56,6 @@ public class shipController {
 
             src.model.ship ship = new src.model.ship(
                     shipRequestDTO.getShipName(),
-                    shipRequestDTO.getCrewSize(),
                     email
             );
             src.model.ship savedShip = shipRepository.save(ship);

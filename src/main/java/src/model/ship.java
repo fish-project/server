@@ -4,9 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import src.exception.shipFullException;
 
-import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -23,19 +21,13 @@ public class ship {
 
     private String shipOwner;
     private String shipName;
-    private int crewSize;
     private List<String> member = new ArrayList<String>();
 
-    public void addMember(String email) throws shipFullException {
-        if(member.size() == crewSize){
-            throw new shipFullException();
-        }
-
+    public void addMember(String email) {
         member.add(email);
     }
 
-    public ship(String shipName, int crewSize, String shipOwner) {
-        this.crewSize = crewSize;
+    public ship(String shipName, String shipOwner) {
         this.shipOwner = shipOwner;
         this.shipName = shipName;
     }
