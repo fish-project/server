@@ -33,7 +33,7 @@ public class role {
                     , HttpStatus.OK);
         } catch (userNotFound e) {
             return new ResponseEntity<>(
-                    new notFound<String>(e.getMessage())
+                    new notFound(e.getMessage())
                     ,HttpStatus.NOT_FOUND
             );
         } catch (IllegalArgumentException e) {

@@ -17,6 +17,18 @@ spring:
     mongodb:
       uri: ${mongo_uri}
       database: ${mongo_database_name}
+      auto-index-creation: true
+  mail:
+    host: ${smtp_host}
+    port: ${smtp_port}
+    username: ${smtp_username}
+    password: ${smtp_passwd}
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+      mail.smtp.connection timeout: 5000
+      mail.smtp.timeout: 5000
+      mail.smtp.write timeout: 5000
 
 server:
   port: 8080  
@@ -25,4 +37,11 @@ server:
       enabled: false  
     include-message: always  
     include-binding-errors: always  
-    include-stacktrace: never  
+    include-stacktrace: never
+
+config:
+  hmac_key: ${hmac_secret_ket}
+  server-domain: "http://localhost:8080"
+  sso-domain:
+    verifyTokenApi: "https://sso.hcmutssps.id.vn/api/verifyToken.php"
+  invitation-expired-for: "12h"

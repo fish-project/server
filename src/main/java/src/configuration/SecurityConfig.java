@@ -26,7 +26,7 @@ public class SecurityConfig {
         http
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
             .authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/public/**"). permitAll()
+                    .requestMatchers("/invitation/**"). permitAll()
                     .requestMatchers("/api/**").hasRole("USER")
                     .requestMatchers("/admin/**").hasRole("ADMIN")
                     .requestMatchers("/ship/**").hasRole("SHIP_MANAGER")
