@@ -32,7 +32,7 @@ public class info {
             );
 
             return new ResponseEntity<>(
-                    new success<user>(user),
+                    new success<src.model.user>(user),
                     HttpStatus.OK
             );
         }   catch (userNotFound e) {

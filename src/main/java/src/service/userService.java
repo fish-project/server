@@ -8,13 +8,18 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 import src.helper.roleHelper;
 import src.model.user;
-
-import java.util.concurrent.ExecutionException;
+import src.repository.userRepository;
 
 @Service
 public class userService {
     @Autowired
     private MongoTemplate mongoTemplate;
+
+    @Autowired
+    private userRepository userRepository;
+
+    @Autowired
+    private GetUserService getUserService;
 
     public void updateDisplayName(String email, String displayName) {
         Query query = new Query(Criteria.where("_id").is(email));
@@ -34,5 +39,10 @@ public class userService {
         Update update = new Update().addToSet("role", role.toLowerCase());
 
         mongoTemplate.updateFirst(query, update, user.class);
+    }
+
+    public void deleteUser(String email) {
+        user user = userRepository.findByEmail(email);
+        userRepository.delete(user);
     }
 }

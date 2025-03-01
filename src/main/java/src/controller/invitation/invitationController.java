@@ -51,7 +51,7 @@ public class invitationController {
             );
 
             if(ship.getMember().contains(email)) {
-                throw new badRequest("User already in ship");
+                throw new badRequest("user already in ship");
             }
 
             ship.getMember().add(email);
