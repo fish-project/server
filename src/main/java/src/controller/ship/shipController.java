@@ -8,11 +8,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import src.DTO.ErrorResponseDTO;
 import src.DTO.shipAddMemRequestDTO;
 import src.DTO.shipRequestDTO;
 import src.exception.shipNotFound;
 import src.exception.shipRequestDTOException;
 import src.exception.userNotFound;
+import src.exception.userNotOnShip;
 import src.model.ship;
 import src.model.shipInvitation;
 import src.repository.ShipRepository;
@@ -20,12 +22,14 @@ import src.repository.shipInvitationRepository;
 import src.repository.userRepository;
 import src.service.hmacService;
 import src.service.mailService;
+import src.service.shipService;
 import src.view.badRequest;
 import src.view.notFound;
 import src.view.serverError;
 import src.view.success;
 
 import java.io.UnsupportedEncodingException;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -116,6 +120,39 @@ public class shipController {
             return new ResponseEntity<>(new badRequest(e.getMessage()), HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
             return new ResponseEntity<>(new serverError(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    //    Leave ship
+    @Autowired
+    shipService shipService;
+
+    @GetMapping("/leave/{shipId}")
+    public ResponseEntity<?> leaveShip(@PathVariable String shipId, Principal principal) {
+        try {
+            String currentUserEmail = principal.getName();
+            shipService.leaveShip(shipId, currentUserEmail);
+            return ResponseEntity.ok().build();
+        } catch (IllegalStateException e) {
+            return ResponseEntity.badRequest().body(new ErrorResponseDTO(e.getMessage()));
+        } catch (shipNotFound e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponseDTO(e.getMessage()));
+        }
+    }
+
+    // Promote crew
+    @GetMapping("/promote/{userId}")
+    public ResponseEntity<?> promoteToOwner(@PathVariable String userId, Principal principal) {
+        try {
+            String currentUserEmail = principal.getName(); // Assumes JWT provides the owner's email
+            shipService.promoteToOwner(userId, currentUserEmail);
+            return ResponseEntity.ok().build();
+        } catch (IllegalStateException e) {
+            return ResponseEntity.badRequest().body(new ErrorResponseDTO(e.getMessage()));
+        } catch (userNotFound e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponseDTO(e.getMessage()));
+        } catch (userNotOnShip e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponseDTO(e.getMessage()));
         }
     }
 }

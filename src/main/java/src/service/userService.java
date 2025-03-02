@@ -45,4 +45,10 @@ public class userService {
         user user = userRepository.findByEmail(email);
         userRepository.delete(user);
     }
+
+    // For leaving ship and promote crew feature
+    public user findByEmail(String email) {
+        Query query = new Query(Criteria.where("_id").is(email));
+        return mongoTemplate.findOne(query, user.class);
+    }
 }
