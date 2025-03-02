@@ -18,7 +18,6 @@ public class ship {
     private String id;
     private String createdDate = ZonedDateTime.now().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
 
-
     private String shipOwner;
     private String shipName;
     private List<String> member = new ArrayList<String>();

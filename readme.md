@@ -10,3 +10,6 @@ wget https://repo1.maven.org/maven2/io/grpc/protoc-gen-grpc-java/1.60.0/protoc-g
 apt install protobuf-compiler
 ```
 ### Chạy chương trình:
+```python
+python3 -B run.py -name main
+```

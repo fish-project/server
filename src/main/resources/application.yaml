@@ -1,4 +1,10 @@
+grpc:
+  security:
+    enabled: false
+
 spring:
+  config:
+    import: optional:file:src/main/resources/.env[.properties]
   application:
     name: lmao
   web:
@@ -38,6 +44,10 @@ server:
     include-message: always  
     include-binding-errors: always  
     include-stacktrace: never
+
+gprc:
+  server:
+    port: 9090
 
 config:
   hmac_key: ${hmac_secret_ket}
