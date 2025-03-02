@@ -36,9 +36,10 @@ public final class Main {
       "\n,src/main/java/src/grpcServer/grpc/main" +
       ".proto\022\004grpc\"(\n\007Request\022\r\n\005email\030\001 \001(\t\022\016" +
       "\n\006shipid\030\002 \001(\t\"\030\n\010Response\022\014\n\004mess\030\001 \001(\t" +
-      "2;\n\014ConfirmEmail\022+\n\ncheckEmail\022\r.grpc.Re" +
-      "quest\032\016.grpc.ResponseB\026\n\022src.grpcServer." +
-      "genP\001b\006proto3"
+      "2i\n\014ConfirmEmail\022+\n\ncheckEmail\022\r.grpc.Re" +
+      "quest\032\016.grpc.Response\022,\n\013checkMember\022\r.g" +
+      "rpc.Request\032\016.grpc.ResponseB\026\n\022src.grpcS" +
+      "erver.genP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

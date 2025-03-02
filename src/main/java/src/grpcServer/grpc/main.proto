@@ -8,6 +8,7 @@ option java_package = "src.grpcServer.gen";
 
 service ConfirmEmail {
   rpc checkEmail (Request) returns (Response);
+  rpc checkMember (Request) returns (Response);
 }
 
 message Request {

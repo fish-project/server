@@ -46,6 +46,37 @@ public final class ConfirmEmailGrpc {
     return getCheckEmailMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<src.grpcServer.gen.Request,
+      src.grpcServer.gen.Response> getCheckMemberMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "checkMember",
+      requestType = src.grpcServer.gen.Request.class,
+      responseType = src.grpcServer.gen.Response.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<src.grpcServer.gen.Request,
+      src.grpcServer.gen.Response> getCheckMemberMethod() {
+    io.grpc.MethodDescriptor<src.grpcServer.gen.Request, src.grpcServer.gen.Response> getCheckMemberMethod;
+    if ((getCheckMemberMethod = ConfirmEmailGrpc.getCheckMemberMethod) == null) {
+      synchronized (ConfirmEmailGrpc.class) {
+        if ((getCheckMemberMethod = ConfirmEmailGrpc.getCheckMemberMethod) == null) {
+          ConfirmEmailGrpc.getCheckMemberMethod = getCheckMemberMethod =
+              io.grpc.MethodDescriptor.<src.grpcServer.gen.Request, src.grpcServer.gen.Response>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "checkMember"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  src.grpcServer.gen.Request.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  src.grpcServer.gen.Response.getDefaultInstance()))
+              .setSchemaDescriptor(new ConfirmEmailMethodDescriptorSupplier("checkMember"))
+              .build();
+        }
+      }
+    }
+    return getCheckMemberMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -100,6 +131,13 @@ public final class ConfirmEmailGrpc {
         io.grpc.stub.StreamObserver<src.grpcServer.gen.Response> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getCheckEmailMethod(), responseObserver);
     }
+
+    /**
+     */
+    default void checkMember(src.grpcServer.gen.Request request,
+        io.grpc.stub.StreamObserver<src.grpcServer.gen.Response> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getCheckMemberMethod(), responseObserver);
+    }
   }
 
   /**
@@ -136,6 +174,14 @@ public final class ConfirmEmailGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getCheckEmailMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void checkMember(src.grpcServer.gen.Request request,
+        io.grpc.stub.StreamObserver<src.grpcServer.gen.Response> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getCheckMemberMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -159,6 +205,13 @@ public final class ConfirmEmailGrpc {
     public src.grpcServer.gen.Response checkEmail(src.grpcServer.gen.Request request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getCheckEmailMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public src.grpcServer.gen.Response checkMember(src.grpcServer.gen.Request request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getCheckMemberMethod(), getCallOptions(), request);
     }
   }
 
@@ -185,9 +238,18 @@ public final class ConfirmEmailGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getCheckEmailMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<src.grpcServer.gen.Response> checkMember(
+        src.grpcServer.gen.Request request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getCheckMemberMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_CHECK_EMAIL = 0;
+  private static final int METHODID_CHECK_MEMBER = 1;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -208,6 +270,10 @@ public final class ConfirmEmailGrpc {
       switch (methodId) {
         case METHODID_CHECK_EMAIL:
           serviceImpl.checkEmail((src.grpcServer.gen.Request) request,
+              (io.grpc.stub.StreamObserver<src.grpcServer.gen.Response>) responseObserver);
+          break;
+        case METHODID_CHECK_MEMBER:
+          serviceImpl.checkMember((src.grpcServer.gen.Request) request,
               (io.grpc.stub.StreamObserver<src.grpcServer.gen.Response>) responseObserver);
           break;
         default:
@@ -235,6 +301,13 @@ public final class ConfirmEmailGrpc {
               src.grpcServer.gen.Request,
               src.grpcServer.gen.Response>(
                 service, METHODID_CHECK_EMAIL)))
+        .addMethod(
+          getCheckMemberMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              src.grpcServer.gen.Request,
+              src.grpcServer.gen.Response>(
+                service, METHODID_CHECK_MEMBER)))
         .build();
   }
 
@@ -284,6 +357,7 @@ public final class ConfirmEmailGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new ConfirmEmailFileDescriptorSupplier())
               .addMethod(getCheckEmailMethod())
+              .addMethod(getCheckMemberMethod())
               .build();
         }
       }
