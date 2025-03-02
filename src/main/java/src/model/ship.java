@@ -12,8 +12,8 @@ import java.util.List;
 
 @Getter
 @Setter
-@Document(collection = "ship")
-public class ship {
+@Document(collection = "Ship")
+public class Ship {
     @Id
     private String id;
     private String createdDate = ZonedDateTime.now().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
