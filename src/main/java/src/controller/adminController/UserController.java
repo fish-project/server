@@ -40,7 +40,7 @@ public class UserController {
                                         @PathVariable String email) {
         try {
             List<ship> ships = shipRepository.findByShipOwner(email);
-            for (ship owningShip: ships) shipRepository.delete(owningShip);
+            shipRepository.deleteAll(ships);
             userService.deleteUser(email);
             return ResponseEntity.ok(email + " has been deleted successfully.");
         } catch (Exception e) {
