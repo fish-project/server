@@ -47,11 +47,11 @@ server:
 
 gprc:
   server:
-    port: 9090
+    it
 
 config:
   hmac_key: ${hmac_secret_ket}
-  server-domain: "http://localhost:8080"
+  server-domain: ${SERVER_DOMAIN}
   sso-domain:
-    verifyTokenApi: "https://sso.hcmutssps.id.vn/api/verifyToken.php"
+    verifyTokenApi: ${VERIFY_TOKEN_API}
   invitation-expired-for: "12h"
