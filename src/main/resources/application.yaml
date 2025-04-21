@@ -53,5 +53,5 @@ config:
   hmac_key: ${hmac_secret_ket}
   server-domain: "http://localhost:8080"
   sso-domain:
-    verifyTokenApi: "https://sso.hcmutssps.id.vn/api/verifyToken.php"
+    verifyTokenApi: ${sso_url}/api/verifyToken.php
   invitation-expired-for: "12h"
